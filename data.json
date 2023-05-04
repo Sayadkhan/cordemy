@@ -1,0 +1,12 @@
+[
+  {
+    "cover": "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Digital Marketing Fundamentals",
+    "instructor": "John Doe",
+    "duration": "6 hours",
+    "rating": 4.8,
+    "description": "Learn the basics of digital marketing, including search engine optimization, social media marketing, email marketing, and more.",
+    "price": 99,
+    "students": 1500
+  }
+]
