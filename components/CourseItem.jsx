@@ -47,7 +47,12 @@ const CourseItem = ({ course }) => {
         <p className="text-gray-500  h-22">{course.description}</p>
         <div className="flex justify-between items-center">
           <p className="text-lg font-semibold">{course.price}</p>
-          <Button href={`/courses/${course.id}`} placeholder="view Details" />
+          <Button
+            href={`/courses/${course.id}`}
+            placeholder="view Details"
+            color=""
+            size="default"
+          />
         </div>
       </div>
     </div>

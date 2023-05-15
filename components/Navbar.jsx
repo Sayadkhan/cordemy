@@ -30,6 +30,8 @@ const Navbar = () => {
             className="hover:text-white
           transition-colors"
             placeholder="sign in"
+            color="secondary"
+            size="default"
           />
         </div>
       </div>
