@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import Button from "./Button";
+import { useSession } from "next-auth/react";
+import { data } from "autoprefixer";
 
 const Navbar = () => {
+  const { data: session } = useSession();
   return (
     <div className="h-20 bg-black text-gray-400 flex items-center">
       <div className="wrapper flex justify-between">
@@ -25,14 +28,21 @@ const Navbar = () => {
         </div>
 
         <div>
-          <Button
-            href="/users/login"
-            className="hover:text-white
-          transition-colors"
-            placeholder="sign in"
-            color="secondary"
-            size="default"
-          />
+          {!session ? (
+            <Button
+              href="/users/login"
+              className="hover:text-white transition-colors"
+              placeholder="sign in"
+              color="secondary"
+              size="default"
+            />
+          ) : (
+            <Button
+              href="/users/profile"
+              placeholder="profile"
+              color="secondary"
+            />
+          )}
         </div>
       </div>
     </div>
