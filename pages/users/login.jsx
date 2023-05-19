@@ -3,8 +3,11 @@ import { FcGoogle } from "react-icons/fc";
 
 import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const LoginPage = ({ session }) => {
+  const router = useRouter();
+
   const loginWithGoogle = async () => {
     try {
       await signIn("google");
@@ -13,32 +16,57 @@ const LoginPage = ({ session }) => {
     }
   };
 
-  return (
-    <div className="wrapper py-10 min-h-screen">
-      <SectionHeader
-        span={"login"}
-        h2={"get started with google"}
-        p={"plse login"}
-      />
-      <div className="flex justify-center">
-        <button
-          className="flex gap-2 items-center bg-black text-white py-3 px-6 rounded-lg mt-5 hover:bg-gray-700 duration-300"
-          onClick={loginWithGoogle}
-        >
-          <span>
-            <FcGoogle />
-          </span>
-          Sign in with Google
-        </button>
+  useEffect(() => {
+    if (session) {
+      const destination = router.query.destination || "/users/profile";
+
+      router.replace(destination);
+    }
+  }, [router, session]);
+
+  if (session) {
+    return null;
+  }
+
+  if (!session) {
+    return (
+      <div className="wrapper py-10 min-h-screen">
+        <SectionHeader
+          span={"login"}
+          h2={"get started with google"}
+          p={"plse login"}
+        />
+        <div className="flex justify-center">
+          <button
+            className="flex gap-2 items-center bg-black text-white py-3 px-6 rounded-lg mt-5 hover:bg-gray-700 duration-300"
+            onClick={loginWithGoogle}
+          >
+            <span>
+              <FcGoogle />
+            </span>
+            Sign in with Google
+          </button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default LoginPage;
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
+
+  if (session) {
+    const destination = context.query.destination || "/users/profile";
+
+    return {
+      redirect: {
+        destination,
+        permanent: false,
+      },
+    };
+  }
 
   return {
     props: {
