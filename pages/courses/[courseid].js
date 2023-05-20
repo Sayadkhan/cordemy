@@ -72,7 +72,7 @@ const CourseDetail = ({ course }) => {
 export default CourseDetail;
 
 export const getServerSideProps = async ({ query }) => {
-  const course = await getCourse(query.courseid);
+  const course = await getCourse(query.courseId);
 
   const updatedCourse = {
     ...course,
