@@ -1,18 +1,18 @@
 import Button from "@/components/Button";
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
-const SuccessPage = () => {
-  const { data: session } = useSession();
-
+const SuccessPage = ({ session }) => {
   const router = useRouter();
+
   useEffect(() => {
     if (!session) {
     }
     router.replace("/users/login");
-  });
+  }, [session, router]);
+
   return (
     <div className="wrapper py-10 min-h-screen">
       <div className="flex flex-col items-center gap-5">
@@ -29,3 +29,22 @@ const SuccessPage = () => {
 };
 
 export default SuccessPage;
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/users/login",
+        permanent: true,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};

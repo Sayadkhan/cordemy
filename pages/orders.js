@@ -4,13 +4,13 @@ import React, { useEffect } from "react";
 
 const OrdersPage = () => {
   const { data: session } = useSession();
-  const router = useRouter();
 
+  const router = useRouter();
   useEffect(() => {
     if (!session) {
-      router.replace("/users/login");
     }
-  });
+    router.replace("/users/login");
+  }, [session, router]);
 
   return <div>OrdersPage</div>;
 };
