@@ -1,7 +1,21 @@
+import Button from "@/components/Button";
 import React from "react";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const success = () => {
-  return <div>success</div>;
+  return (
+    <div className="wrapper py-10 min-h-screen">
+      <div className="flex flex-col items-center gap-5">
+        <h2 className="text-3xl flex items-center gap-3">
+          <span className="text-emerald-500">
+            <AiOutlineCheckCircle />
+          </span>
+          {"You've entrolled successfully"}
+        </h2>
+        <Button href="/orders" placeholder="Get to your orders" />
+      </div>
+    </div>
+  );
 };
 
 export default success;
