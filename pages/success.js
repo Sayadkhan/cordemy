@@ -1,7 +1,7 @@
 import Button from "@/components/Button";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const SuccessPage = ({ session }) => {
@@ -9,9 +9,13 @@ const SuccessPage = ({ session }) => {
 
   useEffect(() => {
     if (!session) {
+      router.replace("/users/login");
     }
-    router.replace("/users/login");
   }, [session, router]);
+
+  if (!session) {
+    return null;
+  }
 
   return (
     <div className="wrapper py-10 min-h-screen">
