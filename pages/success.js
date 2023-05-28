@@ -1,8 +1,18 @@
 import Button from "@/components/Button";
-import React from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 
-const success = () => {
+const SuccessPage = () => {
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!session) {
+    }
+    router.replace("/users/login");
+  });
   return (
     <div className="wrapper py-10 min-h-screen">
       <div className="flex flex-col items-center gap-5">
@@ -18,4 +28,4 @@ const success = () => {
   );
 };
 
-export default success;
+export default SuccessPage;
