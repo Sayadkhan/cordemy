@@ -22,11 +22,14 @@ const CourseDetail = ({ course }) => {
       <div
         style={{ backgroundImage: `url(${course.cover})` }}
         className="w-full h-[32rem] bg-no-repeat bg-cover bg-center"
+        data-aos="fade-up"
       />
 
       <div className="mt-10 grid lg:grid-cols-2 lg:gap-10 space-y-2 lg:space-y-0">
         <div className="left space-y-2">
-          <h2 className="text-3xl font-semibold">{course.title}</h2>
+          <h2 className="text-3xl font-semibold" data-aos="fade-up">
+            {course.title}
+          </h2>
           <p>
             <span className="font-semibold">Instructor:</span>{" "}
             {course.instructor}
